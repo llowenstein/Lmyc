@@ -5,20 +5,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace LmycWeb.Models.Boat
+namespace LmycWeb.Models.Reservation
 {
-    public class Boat
+    public class Reservation
     {
-        public int BoatId { get; set; }
-        public string BoatName { get; set; }
-        public string Picture { get; set; }
-        public int LengthInFeet { get; set; }
-        public string Make { get; set; }
-        public int Year { get; set; }
-
-        [Column(TypeName = "DateTime2")]
-        public DateTime RecordCreationDate { get; set; }
-
+        public int ReservationId { get; set; }
 
         [ForeignKey("User")]
         [Display(Name = "Created By")]
@@ -26,5 +17,16 @@ namespace LmycWeb.Models.Boat
 
         [ScaffoldColumn(false)]
         public ApplicationUser User { get; set; }
+
+        public DateTime StartTime { get; set; }
+
+        public DateTime EndTime { get; set; }
+
+        [ForeignKey("Boat")]
+        [Display(Name = "Boat")]
+        public string BoatName { get; set; }
+
+        [ScaffoldColumn(false)]
+        public ApplicationUser Boat { get; set; }
     }
 }

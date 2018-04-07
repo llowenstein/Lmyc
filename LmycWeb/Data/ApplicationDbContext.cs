@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using LmycWeb.Models;
 using LmycWeb.Models.Boat;
+using LmycWeb.Models.Reservation;
 
 namespace LmycWeb.Data
 {
@@ -27,5 +28,7 @@ namespace LmycWeb.Data
         public DbSet<LmycWeb.Models.ApplicationUser> ApplicationUser { get; set; }
 
         public DbSet<LmycWeb.Models.Boat.Boat> Boat { get; set; }
+
+        public DbSet<Reservation> Reservations { get; set; }
     }
 }

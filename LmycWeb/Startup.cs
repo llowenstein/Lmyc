@@ -97,6 +97,7 @@ namespace LmycWeb
 
             IdentityDummyData.SeedData(userManager, roleManager);
             BoatDummyData.SeedBoats(context);
+            ReservationDummyData.SeedReservations(context);
 
             app.UseMvc(routes =>
             {
