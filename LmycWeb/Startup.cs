@@ -11,6 +11,11 @@ using Microsoft.Extensions.DependencyInjection;
 using LmycWeb.Data;
 using LmycWeb.Models;
 using LmycWeb.Services;
+using LmycWeb.DummyData;
+using Microsoft.AspNetCore.Mvc.Razor;
+using System.Globalization;
+using Microsoft.AspNetCore.Localization;
+using Microsoft.Extensions.Options;
 
 namespace LmycWeb
 {
@@ -37,10 +42,39 @@ namespace LmycWeb
             services.AddTransient<IEmailSender, EmailSender>();
 
             services.AddMvc();
+
+            services.AddLocalization(opts => {
+                opts.ResourcesPath = "Resources";
+            });
+
+            services.AddMvc()
+                .AddViewLocalization(
+                    opts => { opts.ResourcesPath = "Resources"; })
+                .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
+                .AddDataAnnotationsLocalization();
+
+            services.Configure<RequestLocalizationOptions>(opts => {
+                var supportedCultures = new List<CultureInfo> {
+                    new CultureInfo("en"),
+                    new CultureInfo("en-US"),
+                    new CultureInfo("fr"),
+                    new CultureInfo("fr-FR"),
+                    new CultureInfo("zh-CN"),   // Chinese China
+                    new CultureInfo("es-VE"),   // Arabic Egypt
+                  };
+
+                opts.DefaultRequestCulture = new RequestCulture("en-US");
+                // Formatting numbers, dates, etc.
+                opts.SupportedCultures = supportedCultures;
+                // UI strings that we have localized.
+                opts.SupportedUICultures = supportedCultures;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env,
+            UserManager<ApplicationUser> userManager,
+            RoleManager<IdentityRole> roleManager, ApplicationDbContext context)
         {
             if (env.IsDevelopment())
             {
@@ -55,7 +89,14 @@ namespace LmycWeb
 
             app.UseStaticFiles();
 
+            var options = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>();
+            app.UseRequestLocalization(options.Value);
+
+
             app.UseAuthentication();
+
+            IdentityDummyData.SeedData(userManager, roleManager);
+            BoatDummyData.SeedBoats(context);
 
             app.UseMvc(routes =>
             {

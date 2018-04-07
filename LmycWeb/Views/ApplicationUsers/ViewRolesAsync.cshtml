@@ -1,0 +1,16 @@
+﻿@model AddRoleToUser
+@{
+    ViewData["Title"] = "ViewRoles";
+}
+
+<h2>ViewRoles</h2>
+
+@foreach (var item in ViewBag.roles)
+{
+    <p>@item</p>
+}
+
+<div>
+    <a asp-action="AddRoleToUser" asp-route-id="@ViewBag.id">Add Roles</a> |
+    <a asp-action="RemoveRoleFromUser" asp-route-id="@ViewBag.id">Remove Roles</a> |
+</div>

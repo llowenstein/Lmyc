@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using LmycWeb.Models;
+using LmycWeb.Models.Boat;
 
 namespace LmycWeb.Data
 {
@@ -22,5 +23,9 @@ namespace LmycWeb.Data
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
         }
+
+        public DbSet<LmycWeb.Models.ApplicationUser> ApplicationUser { get; set; }
+
+        public DbSet<LmycWeb.Models.Boat.Boat> Boat { get; set; }
     }
 }

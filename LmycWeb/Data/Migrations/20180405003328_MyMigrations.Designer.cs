@@ -11,9 +11,10 @@ using System;
 namespace LmycWeb.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180405003328_MyMigrations")]
+    partial class MyMigrations
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -87,33 +88,6 @@ namespace LmycWeb.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
-                });
-
-            modelBuilder.Entity("LmycWeb.Models.Boat.Boat", b =>
-                {
-                    b.Property<int>("BoatId")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("BoatName");
-
-                    b.Property<string>("CreatedBy");
-
-                    b.Property<int>("LengthInFeet");
-
-                    b.Property<string>("Make");
-
-                    b.Property<string>("Picture");
-
-                    b.Property<DateTime>("RecordCreationDate")
-                        .HasColumnType("DateTime2");
-
-                    b.Property<int>("Year");
-
-                    b.HasKey("BoatId");
-
-                    b.HasIndex("CreatedBy");
-
-                    b.ToTable("Boat");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -222,13 +196,6 @@ namespace LmycWeb.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
-                });
-
-            modelBuilder.Entity("LmycWeb.Models.Boat.Boat", b =>
-                {
-                    b.HasOne("LmycWeb.Models.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("CreatedBy");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
