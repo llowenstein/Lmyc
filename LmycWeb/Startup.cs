@@ -95,6 +95,8 @@ namespace LmycWeb
 
             app.UseAuthentication();
 
+            context.Database.EnsureCreated();
+
             IdentityDummyData.SeedData(userManager, roleManager);
             BoatDummyData.SeedBoats(context);
             ReservationDummyData.SeedReservations(context);
