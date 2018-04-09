@@ -38,8 +38,4 @@
     </EmbeddedResource>
   </ItemGroup>
 
-  <Target Name="PrepublishScript" BeforeTargets="PrepareForPublish">
-    <Exec Command="bower install" />
-  </Target>
-
 </Project>

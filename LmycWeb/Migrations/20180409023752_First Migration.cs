@@ -2,9 +2,9 @@
 using System;
 using System.Collections.Generic;
 
-namespace LmycWeb.Data.Migrations
+namespace LmycWeb.Migrations
 {
-    public partial class migrationtestnoscaffRes : Migration
+    public partial class FirstMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

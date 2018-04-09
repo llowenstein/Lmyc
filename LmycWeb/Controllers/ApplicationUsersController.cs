@@ -98,7 +98,7 @@ namespace LmycWeb.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(string id, [Bind("FirstName,LastName,Street,City,Province,PostalCode,Country,MobileNumber,Experience,Id,UserName,NormalizedUserName,Email,NormalizedEmail,EmailConfirmed,PasswordHash,SecurityStamp,ConcurrencyStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEnd,LockoutEnabled,AccessFailedCount")] ApplicationUser applicationUser)
         {
-            if (id != applicationUser.Id)
+            if (!id.Equals(applicationUser.Id))
             {
                 return NotFound();
             }
@@ -125,7 +125,7 @@ namespace LmycWeb.Controllers
             }
             return View(applicationUser);
         }
-
+            
         // GET: ApplicationUsers/Delete/5
         public async Task<IActionResult> Delete(string id)
         {
