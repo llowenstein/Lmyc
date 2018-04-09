@@ -68,6 +68,14 @@
                 <input asp-for="Email" class="form-control" />
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="AccessFailedCount" />
+            <input type="hidden" asp-for="ConcurrencyStamp" />
+            <input type="hidden" asp-for="NormalizedEmail" />
+            <input type="hidden" asp-for="NormalizedUserName" />
+            <input type="hidden" asp-for="PasswordHash" />
+            <input type="hidden" asp-for="SecurityStamp" />
+            <input type="hidden" asp-for="UserName" />
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-default" />
             </div>
