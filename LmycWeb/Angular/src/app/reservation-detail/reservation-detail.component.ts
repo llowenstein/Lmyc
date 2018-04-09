@@ -20,7 +20,8 @@ export class ReservationDetailComponent implements OnInit {
   ngOnInit() {
     this.route.params.forEach((params: Params) => {
       let id = +params['id'];
-      this.resService.getItemById(id).then(result => this.reservation = result});
+      this.resService.getItemById(id).then(result => this.reservation = result)
+    });
   }
 
 }

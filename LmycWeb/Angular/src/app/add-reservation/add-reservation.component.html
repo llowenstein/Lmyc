@@ -1,0 +1,10 @@
+<div>
+  <p><label>First Name: </label><input [(ngModel)]="newCharacter.FirstName" placeholder="First Name"></p>
+  <p><label>Last Name: </label><input [(ngModel)]="newCharacter.LastName" placeholder="Last Name"></p>
+  <p><label>Occupation: </label><input [(ngModel)]="newCharacter.Occupation" placeholder="Occupation"></p>
+  <p><label>Gender: </label><input [(ngModel)]="newCharacter.Gender" placeholder="M or F"></p>
+  <p><label>Picture: </label><input [(ngModel)]="newCharacter.Picture" placeholder="Picture URL"></p>
+  <button (click)="add(newCharacter);">
+    Add
+  </button>
+ </div>

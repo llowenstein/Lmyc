@@ -6,13 +6,13 @@ import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class ReservationService {
-
+  private apiUrl = 'https://localhost:44387/api/ReservationsAPI';
+  private headers = new Headers({ 'Content-Type': 'application/json' });
 
   constructor(private http: Http) { }
 
   getItems(): Promise<Reservation[]> {
-    let apiUrl = 'https://localhost:44387/api/ReservationsAPI';
-    return this.http.get(apiUrl)
+    return this.http.get(this.apiUrl)
       .toPromise()
       .then(response => response.json() as Reservation[])
       .catch(this.handleError);
@@ -24,7 +24,15 @@ export class ReservationService {
   }
 
   public getItemById(id: number): Promise<Reservation> {
-    return this.getItems().then(result => result.find(res => res.ReservationId === id));
+    return this.getItems().then(result => result.find(res => res.reservationId === id));
+  }
+
+  add(newRes: Reservation): Promise<Reservation> {
+    return this.http
+      .post(this.apiUrl, JSON.stringify(newRes))
+      .toPromise()
+      .then(res => res.json().data)
+      .catch(this.handleError);
   }
 
 }

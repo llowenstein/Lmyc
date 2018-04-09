@@ -24,6 +24,7 @@ namespace LmycWeb.DummyData
                 ApplicationUser user = new ApplicationUser();
                 user.UserName = "a";
                 user.Email = "a@a.a";
+                user.SecurityStamp = Guid.NewGuid().ToString();
                 user.PasswordHash = passwordHash.HashPassword(user,"P@$$w0rd");
 
                 IdentityResult result = userManager.CreateAsync
