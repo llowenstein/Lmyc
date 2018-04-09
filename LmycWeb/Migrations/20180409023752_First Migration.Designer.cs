@@ -8,11 +8,11 @@ using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.Storage.Internal;
 using System;
 
-namespace LmycWeb.Data.Migrations
+namespace LmycWeb.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20180409013648_migration with sqlite2")]
-    partial class migrationwithsqlite2
+    [Migration("20180409023752_First Migration")]
+    partial class FirstMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
