@@ -9,9 +9,11 @@ using LmycWeb.Data;
 using LmycWeb.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Authorization;
 
 namespace LmycWeb.Controllers
 {
+    [Authorize]
     public class ApplicationUsersController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -61,8 +63,11 @@ namespace LmycWeb.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("FirstName,LastName,Street,City,Province,PostalCode,Country,MobileNumber,Experience,Id,UserName,NormalizedUserName,Email,NormalizedEmail,EmailConfirmed,PasswordHash,SecurityStamp,ConcurrencyStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEnd,LockoutEnabled,AccessFailedCount")] ApplicationUser applicationUser)
         {
+            var passwordHash = new PasswordHasher<ApplicationUser>();
             if (ModelState.IsValid)
             {
+                applicationUser.SecurityStamp = Guid.NewGuid().ToString();
+                applicationUser.PasswordHash = passwordHash.HashPassword(applicationUser, "P@$$w0rd");
                 _context.Add(applicationUser);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

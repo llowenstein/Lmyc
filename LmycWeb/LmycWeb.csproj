@@ -3,7 +3,13 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <UserSecretsId>aspnet-LmycWeb-00D8F7C7-5B55-4F68-8C54-E3D92686E031</UserSecretsId>
+	<TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
+	<TypeScriptToolsVersion>2.5</TypeScriptToolsVersion>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Angular\src\app\app-routing.ts" />
+  </ItemGroup>
 
 
   <ItemGroup>
@@ -17,6 +23,10 @@
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.1" />
     <DotNetCliToolReference Include="Microsoft.Extensions.SecretManager.Tools" Version="2.0.0" />
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="Angular\src\app\app-routing.ts" />
   </ItemGroup>
 
   <ItemGroup>

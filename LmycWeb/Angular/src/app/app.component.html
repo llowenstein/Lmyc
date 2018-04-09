@@ -1,0 +1,17 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div style="text-align:center">
+  <h1>
+     {{ title }}
+  </h1>
+</div>
+<h2>Current Reservations</h2>
+<a *ngFor="let item of reservations" class="col-lg-4">
+  <p>ID: {{item.reservationId}}</p>
+  <p>Created by: {{item.createdBy}}</p>
+  <p>Start time: {{item.startTime}}</p>
+  <p>End time: {{item.endTime}}</p>
+  <hr />
+</a>
+
+<a routerLink="/add">Add Reservation</a>
+

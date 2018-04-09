@@ -7,4 +7,12 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'app';
+  items: string[];
+
+  constructor(){
+    this.items = [];
+    this.items.push("item1");
+    this.items.push("item2");
+    console.log(this.items);
+  }
 }

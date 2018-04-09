@@ -32,7 +32,7 @@ namespace LmycWeb
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
@@ -40,6 +40,14 @@ namespace LmycWeb
 
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy", builder => builder.AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .AllowCredentials());
+            });
 
             services.AddMvc();
 
@@ -69,6 +77,7 @@ namespace LmycWeb
                 // UI strings that we have localized.
                 opts.SupportedUICultures = supportedCultures;
             });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -95,9 +104,13 @@ namespace LmycWeb
 
             app.UseAuthentication();
 
+            context.Database.EnsureCreated();
+
             IdentityDummyData.SeedData(userManager, roleManager);
             BoatDummyData.SeedBoats(context);
             ReservationDummyData.SeedReservations(context);
+
+            app.UseCors("CorsPolicy");
 
             app.UseMvc(routes =>
             {
